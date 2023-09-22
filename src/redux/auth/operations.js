@@ -26,3 +26,48 @@ export const registerUserThunk = createAsyncThunk(
     }
   }
 );
+
+export const loginUserThunk = createAsyncThunk(
+  'auth/login',
+  async (userData, thunkApi) => {
+    try {
+      const { data } = await $instance.post('/users/login', userData);
+      setToken(data.token);
+      //   console.log(data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshUserThunk = createAsyncThunk(
+  'auth/refreshUser',
+  async (_, thunkApi) => {
+    const state = thunkApi.getState();
+    const token = state.auth.token;
+
+    try {
+      setToken(token);
+      const { data } = await $instance.get('/users/current');
+      // console.log(data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logoutUserThunk = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkApi) => {
+    try {
+      const { data } = await $instance.post('/users/logout');
+      clearToken();
+      //   console.log(data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
