@@ -1,9 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { loginUserThunk } from 'redux/auth/operations';
+import { selectAuthenticated } from 'redux/auth/selectors';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const authenticated = useSelector(selectAuthenticated);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -13,12 +16,6 @@ const LoginPage = () => {
     const email = form.elements.userEmail.value;
     const password = form.elements.userPassword.value;
 
-    // const finalUserData = {
-    //   name,
-    //   email,
-    //   password,
-    // };
-    // dispatch
     dispatch(
       loginUserThunk({
         email,
@@ -27,6 +24,8 @@ const LoginPage = () => {
     );
     // console.log(finalUserData);
   };
+
+  if (authenticated) return <Navigate to="/contacts" />;
 
   return (
     <div>

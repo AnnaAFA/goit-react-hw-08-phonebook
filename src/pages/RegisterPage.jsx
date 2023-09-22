@@ -1,9 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { registerUserThunk } from 'redux/auth/operations';
+import { selectAuthenticated } from 'redux/auth/selectors';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+  const authenticated = useSelector(selectAuthenticated);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,6 +32,8 @@ const RegisterPage = () => {
     );
     // console.log(finalUserData);
   };
+
+  if (authenticated) return <Navigate to="/contacts" />;
 
   return (
     <div>

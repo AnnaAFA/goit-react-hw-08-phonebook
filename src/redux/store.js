@@ -11,6 +11,7 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
+import { contactsReducer } from './contacts/contactsReducer';
 
 const authPersisConfig = {
   key: 'auth',
@@ -21,6 +22,7 @@ const authPersisConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersisConfig, authReducer),
+    contacts: contactsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
