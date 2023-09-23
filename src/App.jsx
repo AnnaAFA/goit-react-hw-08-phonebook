@@ -1,4 +1,5 @@
 import { StyledNavLink } from 'App.styled';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 import { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -48,7 +49,14 @@ export const App = () => {
           {/* <Loader /> */}
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/contacts" element={<ContactsPage />} />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute redirectTo="/login">
+                  <ContactsPage />
+                </PrivateRoute>
+              }
+            />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>

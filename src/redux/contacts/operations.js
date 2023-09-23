@@ -13,3 +13,29 @@ export const requestContactsThunk = createAsyncThunk(
     }
   }
 );
+
+export const addContactThunk = createAsyncThunk(
+  'contacts/addContacts',
+  async (contactData, thunkApi) => {
+    try {
+      const { data } = await $instance.post('/contacts', contactData);
+      // console.log(data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteContactThunk = createAsyncThunk(
+  'contacts/deleteContacts',
+  async (contactId, thunkApi) => {
+    try {
+      const { data } = await $instance.delete(`/contacts/${contactId}`);
+      // console.log(data);
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
