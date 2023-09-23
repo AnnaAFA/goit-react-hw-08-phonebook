@@ -1,43 +1,45 @@
+import { RegisterForm } from 'components/RegisterForm/RegisterForm';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { registerUserThunk } from 'redux/auth/operations';
+// import { registerUserThunk } from 'redux/auth/operations';
 import { selectAuthenticated } from 'redux/auth/selectors';
 
 const RegisterPage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const authenticated = useSelector(selectAuthenticated);
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  // const handleSubmit = e => {
+  //   e.preventDefault();
 
-    const form = e.currentTarget;
+  //   const form = e.currentTarget;
 
-    const name = form.elements.userName.value;
-    const email = form.elements.userEmail.value;
-    const password = form.elements.userPassword.value;
+  //   const name = form.elements.userName.value;
+  //   const email = form.elements.userEmail.value;
+  //   const password = form.elements.userPassword.value;
 
-    // const finalUserData = {
-    //   name,
-    //   email,
-    //   password,
-    // };
-    // dispatch
-    dispatch(
-      registerUserThunk({
-        name,
-        email,
-        password,
-      })
-    );
-    // console.log(finalUserData);
-  };
+  //   // const finalUserData = {
+  //   //   name,
+  //   //   email,
+  //   //   password,
+  //   // };
+  //   // dispatch
+  //   dispatch(
+  //     registerUserThunk({
+  //       name,
+  //       email,
+  //       password,
+  //     })
+  //   );
+  //   // console.log(finalUserData);
+  // };
 
   if (authenticated) return <Navigate to="/contacts" />;
 
   return (
     <div>
-      <h1>Register Your Account</h1>
+      <RegisterForm />
+      {/* <h1>Register Your Account</h1>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Name:</p>
@@ -52,7 +54,7 @@ const RegisterPage = () => {
           <input name="userPassword" type="password" required minLength={7} />
         </label>
         <button type="submit">Sign Up</button>
-      </form>
+      </form> */}
     </div>
   );
 };

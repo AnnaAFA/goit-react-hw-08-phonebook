@@ -1,15 +1,21 @@
-import { StyledNavLink } from 'App.styled';
+// import { AuthNav } from 'components/AuthNav/AuthNav';
+import { Layout } from 'components/Layout/Layout';
+// import { Loader } from 'components/Loader/Loader';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
-import { Suspense, lazy, useEffect } from 'react';
+import ContactsPage from 'pages/ContactsPage';
+import HomePage from 'pages/HomePage';
+import LoginPage from 'pages/LoginPage';
+import RegisterPage from 'pages/RegisterPage';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { logoutUserThunk, refreshUserThunk } from 'redux/auth/operations';
+import { refreshUserThunk } from 'redux/auth/operations';
 import { selectAuthenticated, selectToken } from 'redux/auth/selectors';
 
-const HomePage = lazy(() => import('./pages/HomePage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage'));
-const LoginPage = lazy(() => import('./pages/LoginPage'));
-const ContactsPage = lazy(() => import('./pages/ContactsPage'));
+// const HomePage = lazy(() => import('./pages/HomePage'));
+// const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+// const LoginPage = lazy(() => import('./pages/LoginPage'));
+// const ContactsPage = lazy(() => import('./pages/ContactsPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -22,46 +28,47 @@ export const App = () => {
     dispatch(refreshUserThunk());
   }, [token, dispatch, authenticated]);
 
-  const handleLogOut = () => {
-    dispatch(logoutUserThunk());
-  };
+  // const handleLogOut = () => {
+  //   dispatch(logoutUserThunk());
+  // };
 
   return (
     <div>
-      <header>
-        <nav>
-          <StyledNavLink to="/">Home</StyledNavLink>
-          {authenticated ? (
-            <>
-              <StyledNavLink to="/contacts">Contacts</StyledNavLink>
-              <button onClick={handleLogOut}>Log Out</button>
-            </>
-          ) : (
-            <>
-              <StyledNavLink to="/login">Login</StyledNavLink>
-              <StyledNavLink to="/register">Register</StyledNavLink>
-            </>
-          )}
-        </nav>
-      </header>
-      <main>
-        <Suspense fallback="Loading...">
-          {/* <Loader /> */}
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="/contacts"
-              element={
-                <PrivateRoute redirectTo="/login">
-                  <ContactsPage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Routes>
-        </Suspense>
-      </main>
+      {/* <header> */}
+      {/* <nav> */}
+      {/* <NavLink to="/">Home</NavLink> */}
+      {/* {authenticated ? ( */}
+      {/* <> */}
+      {/* <NavLink to="/contacts">Contacts</NavLink> */}
+      {/* <button onClick={handleLogOut}>Log Out</button> */}
+      {/* </> */}
+      {/* ) : ( */}
+      {/* <> */}
+      {/* <AuthNav /> */}
+      {/* </> */}
+      {/* )} */}
+      {/* </nav> */}
+      {/* </header> */}
+      {/* <main> */}
+      {/* <Suspense fallback={<Loader />}> */}
+      {/* <Loader /> */}
+      <Routes>
+        <Route path="/" element={<Layout />} />
+        <Route index element={<HomePage />} />
+
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login">
+              <ContactsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+      {/* </Suspense>
+      </main> */}
     </div>
   );
 };

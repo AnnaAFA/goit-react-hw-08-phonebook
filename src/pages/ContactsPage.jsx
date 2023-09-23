@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthenticated } from 'redux/auth/selectors';
@@ -58,7 +59,7 @@ const ContactsPage = () => {
         </label>
         <button type="submit">Add contact</button>
       </form>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader />}
       {error && <p>Oops, some error occurred... {error}</p>}
       <ul>
         {showContacts &&
