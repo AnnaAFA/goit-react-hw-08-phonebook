@@ -20,6 +20,3 @@ export const Loader = () => {
     </LoaderStyle>
   );
 };
-
-// #8b59e7
-// #4ec7e6

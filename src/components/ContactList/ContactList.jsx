@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk } from 'redux/contacts/operations';
-import { selectFilteredContacts } from 'redux/contacts/selectors';
+import {
+  selectContactsLoading,
+  selectFilteredContacts,
+} from 'redux/contacts/selectors';
 import {
   List,
   ListButton,
@@ -8,10 +11,13 @@ import {
   ListWrapper,
   Name,
   NumberStyle,
+  Text,
 } from './ContactList.styled';
+import { Loader } from 'components/Loader/Loader';
 
 export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
+  const isLoading = useSelector(selectContactsLoading);
 
   const dispatch = useDispatch();
 
@@ -23,7 +29,8 @@ export const ContactList = () => {
   return (
     <ListWrapper>
       <List>
-        {showContacts &&
+        {isLoading && <Loader />}
+        {showContacts ? (
           contacts.map(contact => (
             <ListItem key={contact.id}>
               <Name>{contact.name}</Name>
@@ -36,7 +43,10 @@ export const ContactList = () => {
                 &times;
               </ListButton>
             </ListItem>
-          ))}
+          ))
+        ) : (
+          <Text>No contacts</Text>
+        )}
       </List>
     </ListWrapper>
   );

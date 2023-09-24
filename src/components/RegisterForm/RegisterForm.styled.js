@@ -12,6 +12,7 @@ export const Wrap = styled.div`
 export const Text = styled.h1`
   text-align: center;
   margin-bottom: 50px;
+  color: white;
 `;
 
 export const StyledForm = styled.form`

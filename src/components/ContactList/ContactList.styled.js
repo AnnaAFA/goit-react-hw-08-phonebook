@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const ListWrapper = styled.div`
   margin-top: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
   padding: 40px;
   background: linear-gradient(30deg, #8b59e7 10%, #4ec7e6 80%);
 `;
@@ -48,4 +48,8 @@ export const Name = styled.h3`
 
 export const NumberStyle = styled.p`
   margin: 0;
+`;
+export const Text = styled.p`
+  font-size: 20px;
+  color: white;
 `;

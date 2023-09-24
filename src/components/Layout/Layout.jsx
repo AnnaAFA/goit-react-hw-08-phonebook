@@ -1,20 +1,22 @@
 import { AppBar } from 'components/AppBar/AppBar';
+import { Footer } from 'components/Footer/Footer';
 import { Loader } from 'components/Loader/Loader';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { FooterStyle, Main } from './Layout.styled';
 
 export const Layout = () => {
   return (
     <div>
       <AppBar />
-      <main>
+      <Main>
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-      </main>
-      {/* <footer>
+      </Main>
+      <FooterStyle>
         <Footer />
-      </footer> */}
+      </FooterStyle>
     </div>
   );
 };
