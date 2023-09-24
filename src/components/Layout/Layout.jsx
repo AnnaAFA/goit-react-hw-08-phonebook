@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 export const Layout = () => {
   return (
-    <>
+    <div>
       <AppBar />
       <main>
         <Suspense fallback={<Loader />}>
@@ -15,6 +15,6 @@ export const Layout = () => {
       {/* <footer>
         <Footer />
       </footer> */}
-    </>
+    </div>
   );
 };

@@ -1,49 +1,43 @@
-// import PropTypes from 'prop-types';
-// import { List, ListButton, ListWrapper } from './ContactList.styled';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { selectContacts, selectFilter } from 'redux/selectors';
-// import { deleteContactThunk } from 'redux/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContactThunk } from 'redux/contacts/operations';
+import { selectFilteredContacts } from 'redux/contacts/selectors';
+import {
+  List,
+  ListButton,
+  ListItem,
+  ListWrapper,
+  Name,
+  NumberStyle,
+} from './ContactList.styled';
 
-// export const ContactList = () => {
-//   const contacts = useSelector(selectContacts);
-//   const filter = useSelector(selectFilter);
+export const ContactList = () => {
+  const contacts = useSelector(selectFilteredContacts);
 
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-//   const filterContacts = contacts.filter(contact =>
-//     contact.name.toLowerCase().includes(filter.toLowerCase())
-//   );
+  const showContacts = Array.isArray(contacts) && contacts.length > 0;
 
-//   const onRemoveContact = id => dispatch(deleteContactThunk(id));
-
-//   return (
-//     <ListWrapper>
-//       <List>
-//         {filterContacts.map(contact => (
-//           <li key={contact.id}>
-//             <p>
-//               {contact.name} : {contact.phone}
-//             </p>
-//             <ListButton
-//               type="button"
-//               onClick={() => onRemoveContact(contact.id)}
-//             >
-//               Delete
-//             </ListButton>
-//           </li>
-//         ))}
-//       </List>
-//     </ListWrapper>
-//   );
-// };
-
-// ContactList.prototype = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string,
-//       name: PropTypes.string,
-//       phone: PropTypes.string,
-//     })
-//   ),
-//   onRemoveContact: PropTypes.func,
-// };
+  const handleDeleteContact = contactId => {
+    dispatch(deleteContactThunk(contactId));
+  };
+  return (
+    <ListWrapper>
+      <List>
+        {showContacts &&
+          contacts.map(contact => (
+            <ListItem key={contact.id}>
+              <Name>{contact.name}</Name>
+              <NumberStyle>{contact.number}</NumberStyle>
+              <ListButton
+                onClick={() => handleDeleteContact(contact.id)}
+                type="button"
+                aria-label="Delete contact"
+              >
+                &times;
+              </ListButton>
+            </ListItem>
+          ))}
+      </List>
+    </ListWrapper>
+  );
+};

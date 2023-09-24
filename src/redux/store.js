@@ -12,6 +12,7 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import { contactsReducer } from './contacts/contactsReducer';
+import { filterReducer } from './contacts/filterReducer';
 
 const authPersisConfig = {
   key: 'auth',
@@ -23,6 +24,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersisConfig, authReducer),
     contacts: contactsReducer,
+    filter: filterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

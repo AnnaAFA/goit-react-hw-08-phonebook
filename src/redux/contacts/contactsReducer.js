@@ -6,7 +6,7 @@ import {
 } from './operations';
 
 const initialState = {
-  contacts: null,
+  contacts: [],
   isLoading: false,
   error: null,
 };
@@ -36,8 +36,8 @@ const contactsSlice = createSlice({
       })
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.contacts = [...state.contacts, action.payload];
-        state.contacts.push(action.payload);
+        state.contacts = [...state.contacts, action.payload];
+        // state.contacts.push(action.payload);
       })
       .addCase(addContactThunk.rejected, (state, action) => {
         state.isLoading = false;

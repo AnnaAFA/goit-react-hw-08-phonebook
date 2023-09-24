@@ -1,6 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUserThunk } from 'redux/auth/operations';
+import {
+  BtnStyle,
+  InputStyle,
+  StyledForm,
+  Text,
+  Wrap,
+} from './RegisterForm.styled';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -14,12 +21,6 @@ export const RegisterForm = () => {
     const email = form.elements.userEmail.value;
     const password = form.elements.userPassword.value;
 
-    // const finalUserData = {
-    //   name,
-    //   email,
-    //   password,
-    // };
-    // dispatch
     dispatch(
       registerUserThunk({
         name,
@@ -27,15 +28,14 @@ export const RegisterForm = () => {
         password,
       })
     );
-    // console.log(finalUserData);
   };
   return (
-    <div>
-      <h1>Register Your Account</h1>
-      <form onSubmit={handleSubmit}>
+    <Wrap>
+      <Text>Register Your Account</Text>
+      <StyledForm onSubmit={handleSubmit}>
         <label>
           <p>Name:</p>
-          <input
+          <InputStyle
             name="userName"
             type="text"
             pattern="^[^\d]+$"
@@ -46,7 +46,7 @@ export const RegisterForm = () => {
         </label>
         <label>
           <p>Email:</p>
-          <input
+          <InputStyle
             name="userEmail"
             type="email"
             pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
@@ -56,7 +56,7 @@ export const RegisterForm = () => {
         </label>
         <label>
           <p>Password:</p>
-          <input
+          <InputStyle
             name="userPassword"
             type="password"
             pattern="^[a-zA-Z0-9!@#$%^&*\(\)\-_=+`~\[\]\{\}\|:<>\/?]+$"
@@ -65,8 +65,8 @@ export const RegisterForm = () => {
             minLength={7}
           />
         </label>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+        <BtnStyle type="submit">Sign Up</BtnStyle>
+      </StyledForm>
+    </Wrap>
   );
 };

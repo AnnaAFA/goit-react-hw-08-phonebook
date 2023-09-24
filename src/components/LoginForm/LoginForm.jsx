@@ -1,6 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUserThunk } from 'redux/auth/operations';
+import {
+  BtnSignIn,
+  InputStyle,
+  StyledForm,
+  Text,
+  Wrap,
+} from './LoginForm.styled';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,16 +26,15 @@ export const LoginForm = () => {
         password,
       })
     );
-    // console.log(finalUserData);
   };
 
   return (
-    <div>
-      <h1>Login Into Your Account</h1>
-      <form onSubmit={handleSubmit}>
+    <Wrap>
+      <Text>Login Into Your Account</Text>
+      <StyledForm onSubmit={handleSubmit}>
         <label>
           <p>Email:</p>
-          <input
+          <InputStyle
             name="userEmail"
             type="email"
             pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
@@ -38,7 +44,7 @@ export const LoginForm = () => {
         </label>
         <label>
           <p>Password:</p>
-          <input
+          <InputStyle
             name="userPassword"
             type="password"
             pattern="^[a-zA-Z0-9!@#$%^&*\(\)\-_=+`~\[\]\{\}\|:<>\/?]+$"
@@ -47,8 +53,8 @@ export const LoginForm = () => {
             minLength={7}
           />
         </label>
-        <button type="submit">Sign In</button>
-      </form>
-    </div>
+        <BtnSignIn type="submit">Sign In</BtnSignIn>
+      </StyledForm>
+    </Wrap>
   );
 };

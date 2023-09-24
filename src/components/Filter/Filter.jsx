@@ -1,38 +1,36 @@
-// import PropTypes from 'prop-types';
-// import { FilterForm, FilterTitle } from './Filter.styled';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { setFilter } from 'redux/filterSlice';
-// import { selectFilter } from 'redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from 'redux/contacts/filterReducer';
+import { selectFilter } from 'redux/contacts/selectors';
+import {
+  FilterForm,
+  FilterTitle,
+  InputStyleFilter,
+  StyleSpan,
+} from './Filter.styled';
 
-// export const Filter = () => {
-//   const dispatch = useDispatch();
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
 
-//   const onFilterChange = e => {
-//     const filterValue = e.target.value.toLowerCase();
+  const onFilterChange = e => {
+    const filterValue = e.target.value.toLowerCase();
 
-//     dispatch(setFilter(filterValue));
-//   };
+    dispatch(setFilter(filterValue));
+  };
 
-//   const filter = useSelector(selectFilter);
-
-//   return (
-//     <>
-//       <FilterForm>
-//         <FilterTitle>
-//           <span>Find contact by name</span>
-//           <input
-//             type="text"
-//             name="filter"
-//             value={filter}
-//             onChange={onFilterChange}
-//           />
-//         </FilterTitle>
-//       </FilterForm>
-//     </>
-//   );
-// };
-
-// Filter.propTypes = {
-//   onFilterChange: PropTypes.func,
-//   filter: PropTypes.string,
-// };
+  return (
+    <>
+      <FilterForm>
+        <FilterTitle>
+          <StyleSpan>Find contact by name</StyleSpan>
+          <InputStyleFilter
+            type="text"
+            name="filter"
+            value={filter}
+            onChange={onFilterChange}
+          />
+        </FilterTitle>
+      </FilterForm>
+    </>
+  );
+};
